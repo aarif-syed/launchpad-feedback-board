@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="LaunchPad is a lightweight product feedback and issue tracking dashboard.">
+  <title>LaunchPad — Product Feedback Board</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="LaunchPad home"><span class="brand-mark">L</span><span>launchpad</span></a>
+      <div class="workspace-label">WORKSPACE</div>
+      <button class="nav-item active" data-view="all"><span>▦</span> Overview</button>
+      <button class="nav-item" data-view="open"><span>◷</span> Open issues</button>
+      <button class="nav-item" data-view="progress"><span>↻</span> In progress</button>
+      <button class="nav-item" data-view="done"><span>✓</span> Completed</button>
+      <div class="sidebar-bottom">
+        <div class="avatar">AR</div>
+        <div><strong>Arif's workspace</strong><small>Free plan</small></div>
+        <span class="more">···</span>
+      </div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar">
+        <div class="crumb">Workspace <span>/</span> <strong id="crumb-current">Overview</strong></div>
+        <div class="top-actions"><span class="status-dot"></span><span class="saved-label">Saved locally</span><button class="avatar small" title="Profile">AR</button></div>
+      </header>
+      <section class="page">
+        <div class="page-heading">
+          <div><p class="eyebrow">PRODUCT OPERATIONS</p><h1 id="page-title">Feedback overview</h1><p class="subheading">Capture feedback, prioritize what matters, and keep every issue moving.</p></div>
+          <button class="primary-btn" id="new-issue-btn"><span>＋</span> New feedback</button>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>Total feedback</span><span class="stat-icon purple">▤</span></div><strong id="stat-total">0</strong><small>Across your workspace</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Needs attention</span><span class="stat-icon orange">◷</span></div><strong id="stat-open">0</strong><small>Open and unassigned</small></article>
+          <article class="stat-card"><div class="stat-top"><span>In progress</span><span class="stat-icon blue">↻</span></div><strong id="stat-progress">0</strong><small>Currently being worked on</small></article>
+          <article class="stat-card"><div class="stat-top"><span>Completed</span><span class="stat-icon green">✓</span></div><strong id="stat-done">0</strong><small>Closed feedback items</small></article>
+        </div>
+        <section class="board-card">
+          <div class="board-heading"><div><h2>Feedback board</h2><p>Review requests and track progress</p></div><div class="board-tools"><label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Search feedback…" aria-label="Search feedback"></label><select id="priority-filter" aria-label="Filter by priority"><option value="all">All priorities</option><option value="High">High priority</option><option value="Medium">Medium priority</option><option value="Low">Low priority</option></select></div></div>
+          <div class="table-wrap"><table><thead><tr><th>FEEDBACK</th><th>PRIORITY</th><th>STATUS</th><th>CREATED</th><th></th></tr></thead><tbody id="issue-rows"></tbody></table></div>
+          <div id="empty-state" class="empty-state" hidden><div class="empty-icon">✦</div><h3>No feedback found</h3><p>Try a different search, or add your first feedback item.</p><button class="secondary-btn" id="empty-new-btn">Create feedback</button></div>
+          <footer class="table-footer"><span id="results-count">0 items</span><span>Changes are saved in this browser</span></footer>
+        </section>
+        <p class="footnote">Built for small teams who want clear ownership and fewer dropped details.</p>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="issue-dialog">
+    <form id="issue-form" method="dialog">
+      <div class="dialog-head"><div><p class="eyebrow">NEW ITEM</p><h2>Share feedback</h2></div><button type="button" class="close-btn" id="close-dialog" aria-label="Close">×</button></div>
+      <label class="field-label" for="issue-title">Title <span>*</span></label>
+      <input id="issue-title" name="title" maxlength="100" required placeholder="e.g. Add keyboard shortcuts">
+      <label class="field-label" for="issue-description">Description</label>
+      <textarea id="issue-description" name="description" rows="3" maxlength="500" placeholder="What happened, or what would make the product better?"></textarea>
+      <div class="field-row"><div><label class="field-label" for="issue-priority">Priority</label><select id="issue-priority" name="priority"><option>Medium</option><option>High</option><option>Low</option></select></div><div><label class="field-label" for="issue-status">Status</label><select id="issue-status" name="status"><option>Open</option><option>In progress</option><option>Done</option></select></div></div>
+      <div class="dialog-actions"><button type="button" class="secondary-btn" id="cancel-dialog">Cancel</button><button type="submit" class="primary-btn">Create feedback</button></div>
+    </form>
+  </dialog>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
